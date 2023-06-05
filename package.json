@@ -1,0 +1,17 @@
+{
+  "name": "restapimuskkorea",
+  "version": "1.0.0",
+  "description": "belajar membuat rest api Korea Musik menggunakan exress js dan docker ",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon ./src/index.js"
+  },
+  "author": "ALfajdri Dwi Fadhilah",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.1.3",
+    "express": "^4.18.2",
+    "mysql2": "^3.3.3",
+    "nodemon": "^2.0.22"
+  }
+}
