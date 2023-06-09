@@ -1,3 +1,4 @@
+
 # Tujuan Pembuatan 
 Repo ini di buat sebagai tugas kuliah untuk percoban dan test kemampuan membuat restApi
 
@@ -12,12 +13,28 @@ Repo ini di buat sebagai tugas kuliah untuk percoban dan test kemampuan membuat 
 Repo ini menggunkana model MVC (Model View Controller)
 
 # Setup Project
-1.Rename .env.example to .env
-2.Install pakage
+*Rename .env.example to .env
+*Run Project menggunkana npm 
+1.Menggunkana npm 
+``` bash 
+npm install```
+2.Run
+``` bash 
+npm start```
+3.url 
+``http://localhost:4000/``
+
+*Run Project Docker
 ```bash
-    npm install 
+docker-compose -f docker-compose.yml up
 ```
-3.Run proyek
-```bash
-    docker-compose -f docker-compose up 
-```
+url 
+``http://localhost/``
+
+
+## note
+untuk phpmyadmin mode developer 
+``hhttp://localhost:8080``
+
+
+

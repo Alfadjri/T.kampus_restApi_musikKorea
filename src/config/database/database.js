@@ -6,8 +6,12 @@ const password = porcess.env.db_password;
 const database = process.env.db_database;
 
 const db = mysql.createPool({
+<<<<<<< HEAD
   host : host,
   port : port,
+=======
+  host : port,
+>>>>>>> upstream/main
   user : user,
   password : password,
   database : database,
