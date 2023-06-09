@@ -37,4 +37,7 @@ untuk phpmyadmin mode developer
 ``hhttp://localhost:8080``
 
 
+## Sumber Database list 
+* https://www.kaggle.com/datasets/kimjihoo/kpopdb?resource=download
+
 
