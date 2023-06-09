@@ -6,11 +6,7 @@ services :
       context : .
       dockerfile : src/config/docker/Dockerfile
     ports :
-<<<<<<< HEAD
       - 80:4000
-=======
-      - ${host_port}:4000
->>>>>>> upstream/main
     stdin_open : true
     depends_on:
       - database
@@ -18,13 +14,7 @@ services :
       - .env
     volumes :
       - .:/usr/src/app
-<<<<<<< HEAD
       - node_modules:/usr/src/app/node_modules
-
-=======
-      - ./node_modules:/usr/src/app/node_modules
-    
->>>>>>> upstream/main
   database:
     image : mysql
     ports:
@@ -35,37 +25,19 @@ services :
       MYSQL_USER: ${db_user}
       MYSQL_PASSWORD: ${db_password}
     volumes:
-<<<<<<< HEAD
       - db_data:/var/lib/mysql
-
   phpmyadmin:
     container_name: phpmyadmin
     image : phpmyadmin
     ports:
       - 8080:80
-=======
-      - ./db_data:/var/lib/mysql
-  phpmyadmin:
-    container_name: phpmyadmin
-    depends_on:
-      - database
-    image : phpmyadmin
-    ports:
-      - ${phpmyadmin_port}:80
->>>>>>> upstream/main
     environment:
       PMA_HOST: database
       MYSQL_ROOT_PASSWORD: ${db_password}
       MYSQL_USERNAME: ${db_user}
       MYSQL_PASSWORD: ${db_password}
-<<<<<<< HEAD
-volumes : 
-  db_data:
-  node_modules:
-=======
 
 volumes : 
   db_data:
   node_modules:
 
->>>>>>> upstream/main
