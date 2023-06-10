@@ -1,18 +1,17 @@
 
 class typeImport {
   checkType(req,res,next) {
-    const file = req.file;
-    const code_status = 400;
+    const file = req;
     if(!file){
-      return res.status(code_status).send("File tidak di temukan ");
+      res.status(400).send("File tidak di temukan ");
     }
     if(file === 0){
-      return res.status(code_status).send("File Kosong");
+      res.status(400).send("File Kosong");
+    } 
+    if(file.mimetype !== 'text/csv' && file.mimetype !== 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'  ){    
+      res.status(400).send("Type File yang anda masukan tidak sesuai !!! hanya dapat xlsx atau csv");
     }
-    if(file.mimeType !==  'text/csv' || file.mimeType !== 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'){
-      return res.status(code_status).send("Type FIle yang anda masukan tidak sesuai !!! hanya dapat xlsx dan csv");
-    }
-    next();
+    next;
   }
 }
 
