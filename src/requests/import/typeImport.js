@@ -1,6 +1,6 @@
 
-class typeImport {
-  checkType(req,res,next) {
+
+const  checkType = (req,res,next) => {
     const file = req;
     if(!file){
       res.status(400).send("File tidak di temukan ");
@@ -12,8 +12,9 @@ class typeImport {
       res.status(400).send("Type File yang anda masukan tidak sesuai !!! hanya dapat xlsx atau csv");
     }
     next;
-  }
 }
 
-module.exports = typeImport;
+module.exports = {
+  checkType,
+};
 
