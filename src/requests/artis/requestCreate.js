@@ -3,44 +3,39 @@ const pesanKosong = "tidak boleh kosong !";
 const pesanHarusString = "data harus string !";
 const pesanTanggal = "data harus berupa tanggal internasional";
 const pesanInteger = "data harus bertipe integer";
-const optionActive = ["Yes","No"];
+const optionActive = ["M","F"];
 const pesanPilihan = "Pilihan yang anda masukan tidak terdaftar";
 
 const validateCreateBody = [
-  body("nama")
+  body("s_name")
     .notEmpty().withMessage(pesanKosong).trim()
     .isString().withMessage(pesanHarusString),
-  body("shot")
-    .optional().trim()
-    .isString().withMessage(pesanKosong),
-  body("korea name")
+  body("f_name")
     .notEmpty().withMessage(pesanKosong).trim()
     .isString().withMessage(pesanHarusString),
-  body("debut")
-    .isDate().withMessage(pesanTanggal)
-    .isString().withMessage(pesanTanggal),
-  body("nama company")
+  body("k_name")
     .notEmpty().withMessage(pesanKosong).trim()
     .isString().withMessage(pesanHarusString),
-  body("jumlah member")
+  body("k_name")
     .notEmpty().withMessage(pesanKosong).trim()
-    .isInt().withMessage(pesanInteger),
-  body("original member")
-    .notEmpty().withMessage(pesanKosong).trim()
-    .isInt().withMessage(pesanInteger),
-  body("funclub name")
-    .optional().trim()
     .isString().withMessage(pesanHarusString),
-  body("active")
-    .notEmpty()
+  body("k_s_name")
+    .notEmpty().withMessage(pesanKosong).trim()
+    .isString().withMessage(pesanHarusString),
+  body("birth")
+    .isDate().withMessage(pesanTanggal).trim()
+    .isString().withMessage(pesanHarusString),
+  body("negara")
+    .notEmpty().withMessage(pesanKosong).trim()
+    .isString().withMessage(pesanHarusString),
+  body("gender")
+    .notEmpty().withMessage(pesanKosong).trim()
     .isIn(optionActive).withMessage(pesanPilihan),
+  body("kota")
+    .optional().trim()
+    .isString().withMessage(pesanHarusString),
 ];
 
-const validateParam = [
-  param('nama')
-    .optional().trim()
-    .isString().withMessage("Parameter harus berupa String"),
-];
 
 const formatErrors = ({ msg, path }) => ({[path]: msg });
 
@@ -58,6 +53,5 @@ const validate = (req, res, next) => {
 
 module.exports = {
   validateCreateBody,
-  validateParam,
   validate,
 }

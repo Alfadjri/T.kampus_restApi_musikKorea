@@ -5,7 +5,7 @@ const formattedDate = currentDate.toISOString().slice(0, 19).replace('T', ' ');
 const createGrup = (value) => {
   const shortValue = value.short ? `'${value.short}'` : null;
   const fans = value['fanclub name'] ? `'${value['fanclub name']}'` : null;
-  const aktif = (value['active'] == "Hiatus" ) ? "No" : (value['active'] == "No") ? "No" : "Yes";
+  const aktif = value['active'] == "Hiatus"  ? "No" : value['active'] == "No" ? "No" : "Yes";
   const query = `INSERT INTO Grup
                   (name, short, k_name, 
                     debut, id_company, 

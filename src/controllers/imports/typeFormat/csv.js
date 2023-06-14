@@ -6,12 +6,38 @@ const Grup  = require('../../grupController');
 const Video = require('../../videoController');
 
 
-const importFile = (file,type) => {
+const importFile = async (file,type) => {
     const workBook = xlsx.read(file.buffer,{type:'buffer'});
     const workSheet = workBook.SheetNames[0];
     const sheetData = xlsx.utils.sheet_to_json(workBook.Sheets[workSheet]);
-    sheetData.forEach((datas) => {
-      const data = Object.keys(datas).sort();
+    let isValid = null;
+    for(const datas of sheetData){
+        let mainData = null;
+        switch(type){
+          case 'artis':
+            mainData = formatArtis(datas); 
+            isValid = Artis.createArtis(mainData);
+          break;
+          case 'grup':
+            mainData = formatGrup(datas);
+            isValid = await Grup.createGrup(mainData);
+          break;
+          case 'video':
+          break;
+          default:
+            return false;
+      }
+    };
+    return isValid;
+}
+
+const changeFormatData = (value) => {
+  const date = new Date((value - 25569) * 86400 * 1000); // Mengonversi angka Excel menjadi Unix timestamp
+  const formattedDate = format(date, 'yyyy-MM-dd');
+  return formattedDate;
+}
+const formatGrup = (datas) => {
+    const data = Object.keys(datas).sort();
       let mainData = {};
       let Data = null;
       data.forEach((key) => {
@@ -37,38 +63,66 @@ const importFile = (file,type) => {
         if(key == "Active"){
           Data = {"active" :`${datas[key]}`};
         }
-        mainData = Object.assign(mainData, Data);
         if(key == "Fanclub Name"){
-          Data = {"fanclub name" : `${datas[key]}`}; 
-        }else{
-          Data = {"fanclub name" : null};
+          const fan = (datas[key] !== null) ? `${datas[key]}` : null;
+          Data = {"fanclub name" : `${fan}`}; 
         }
-        mainData = Object.assign(mainData,Data);
         if(key == "Short"){
-          Data = {"short" : `${datas[key]}`};
-        }else{
-          Data = {"short" : null};
+          const short = (datas[key] !== null) ? `${datas[key]}` : null;
+          Data = {"short" : `${short}`};
         }
         mainData = Object.assign(mainData,Data);
       }); 
-      switch(type){
-          case 'artis':
-          break;
-          case 'grup':
-            Grup.createGrup(mainData);
-          break;
-          case 'video':
-          break;
-          default:
-            return false;
-      }
-    });
+      return mainData;
 }
 
-const changeFormatData = (value) => {
-  const date = new Date((value - 25569) * 86400 * 1000); // Mengonversi angka Excel menjadi Unix timestamp
-  const formattedDate = format(date, 'yyyy-MM-dd');
-  return formattedDate;
+const formatArtis = (datas) => {
+    const data = Object.keys(datas).sort();
+    let mainData = {};
+    let dataGrup = [];
+    let Data = null;
+    data.forEach((key) => {
+      if(key == "Stage Name"){
+        Data = {"s_name" : `${datas[key]}`};
+      }
+      if(key == "Full Name"){
+        Data = {"f_name" : `${datas[key]}`};
+      }
+      if(key == "Korean Name"){
+        Data = {"k_name" : `${datas[key]}`};
+      }
+      if(key == "K. Stage Name"){
+        Data = {"k_s_name" : `${datas[key]}`};
+      }
+        mainData = Object.assign(mainData,Data);
+
+      if(key == "Group"){
+        if(datas[key] !== null) dataGrup.push(`${datas[key]}`);
+      }
+      if(key == "Other Group"){
+        if(datas[key] !== null) dataGrup.push(`${datas[key]}`);
+      }
+      if(dataGrup !== null){
+        Data = {"grup" : dataGrup};
+      }
+      if(key == "Date of Birth"){
+        const date = changeFormatData(`${datas[key]}`);
+        Data = {"birth" :`${date}`}; 
+      }
+      if(key == "Country"){
+        Data = {"negara" : `${datas[key]}`};
+      }
+      if(key == "Gender"){
+        Data = {"gender" : `${datas[key]}`};
+      }
+      mainData = Object.assign(mainData,Data);
+      if(key == "Birthplace"){
+        const kota = (datas[key] === null) ? null : `${datas[key]}`;
+        Data = {"kota" : `${kota}`};
+      }
+      mainData = Object.assign(mainData,Data);
+    });
+    return mainData;
 }
 
 module.exports = {
