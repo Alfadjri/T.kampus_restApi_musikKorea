@@ -10,7 +10,7 @@ const getValue = (search,id_kota) => {
               FROM Negara JOIN Kota ON Negara.id_kota = Kota.id_kota 
               WHERE Negara.name_negara = "${search}"  and Kota.id_kota = "${id_kota}" Limit 1`;
   }else{
-    query = `Select id_negara as id , name_negara as negara FROM Negara WHERE name_negara = "${search}" Limit  1`; 
+    query = `Select id_negara as id , name_negara as negara,id_kota FROM Negara WHERE name_negara = "${search}" and id_kota is null Limit  1`; 
   }
   return db.execute(query);
 }

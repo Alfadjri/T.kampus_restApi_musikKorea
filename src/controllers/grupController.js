@@ -39,7 +39,7 @@ const getGrup  = async(req,res) => {
   try{
     const search = req.params;
     let result = [];
-    if(search){
+    if(search.nama != null ){
       [result] = await Grup.getGrup(search.nama);
     }else{
       [result] = await Grup.getAllGrup();

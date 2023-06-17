@@ -35,7 +35,11 @@ const validateCreateBody = [
     .optional().trim()
     .isString().withMessage(pesanHarusString),
 ];
-
+const validateParam= [
+  body("nama")
+    .optional()
+    .isString().withMessage(pesanHarusString),
+];
 
 const formatErrors = ({ msg, path }) => ({[path]: msg });
 
@@ -53,5 +57,6 @@ const validate = (req, res, next) => {
 
 module.exports = {
   validateCreateBody,
+  validateParam,
   validate,
 }

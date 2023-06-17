@@ -16,7 +16,7 @@ const importFile = async (file,type) => {
         switch(type){
           case 'artis':
             mainData = formatArtis(datas); 
-            isValid = Artis.createArtis(mainData);
+            isValid = await Artis.createArtis(mainData);
           break;
           case 'grup':
             mainData = formatGrup(datas);
@@ -79,8 +79,8 @@ const formatGrup = (datas) => {
 const formatArtis = (datas) => {
     const data = Object.keys(datas).sort();
     let mainData = {};
-    let dataGrup = [];
     let Data = null;
+    let dataGrup = [];
     data.forEach((key) => {
       if(key == "Stage Name"){
         Data = {"s_name" : `${datas[key]}`};
@@ -102,7 +102,7 @@ const formatArtis = (datas) => {
       if(key == "Other Group"){
         if(datas[key] !== null) dataGrup.push(`${datas[key]}`);
       }
-      if(dataGrup !== null){
+      if(dataGrup !== undefined){
         Data = {"grup" : dataGrup};
       }
       if(key == "Date of Birth"){

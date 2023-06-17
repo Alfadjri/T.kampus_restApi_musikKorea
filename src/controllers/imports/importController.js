@@ -3,11 +3,13 @@ const {importFile} = require('./typeFormat/csv');
 
 const ImportExcel = (typeImport) => { return async (req,res) => { 
     const file  = req.file;
-    checkType(file);
     if(file.mimetype === 'text/csv'){
       const uploadFile = await importFile(file,typeImport,res);
-      if(!uploadFile) return res.status(400).send("Gagal melakukan Import");
-      return res.status(200).send("Data berhasil di import");
+      if(uploadFile == false) {
+        return res.status(400).json({Message : "Import Gagal Terjadi Kesalahan pada File"});
+      }else{
+        return res.status(200).json({message : "Import Berhasil"});
+      }
     }
     if(file.mimetype === 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'){
 

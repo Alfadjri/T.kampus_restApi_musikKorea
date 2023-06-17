@@ -7,7 +7,6 @@ const getValue = (search) => {
   return db.execute(query);
 }
 const create = (city) => {
-  console.log(city);
   const query = `INSERT INTO Kota(place,create_at,updated_at) VALUES ('${city}','${formattedDate}','${formattedDate}')`;
   return db.execute(query);
 }
