@@ -36,6 +36,12 @@ const getAllGrup = () => {
                JOIN Company ON Grup.id_company = Company.id_company`;
   return db.execute(query);
 }
+
+const getGrupSong = (value) => {
+  const query = `SELECT id_grup FROM Grup where name ="${value}" or short="${value}"`;
+  return db.execute(query);
+}
+
 const updateGrup = (id_grup,value) => {
   const shortValue = value.short ? `'${value.short}'` : 'NULL';
   const fans = value['fanclub name'] ? `'${value['fanclub name']}'` : 'NULL';
@@ -65,5 +71,6 @@ module.exports = {
   getGrup,
   getAllGrup,
   updateGrup,
-  deleteGrup
+  deleteGrup,
+  getGrupSong,
 }

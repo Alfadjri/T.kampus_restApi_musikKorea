@@ -7,7 +7,7 @@ const Video = require('../../videoController');
 
 
 const importFile = async (file,type) => {
-    const workBook = xlsx.read(file.buffer,{type:'buffer'});
+    const workBook = xlsx.read(file.buffer,{ type: 'buffer' });
     const workSheet = workBook.SheetNames[0];
     const sheetData = xlsx.utils.sheet_to_json(workBook.Sheets[workSheet]);
     let isValid = null;
@@ -23,6 +23,8 @@ const importFile = async (file,type) => {
             isValid = await Grup.createGrup(mainData);
           break;
           case 'video':
+            mainData = formatVideo(datas);
+            isValid = await Video.createVideo(mainData);
           break;
           default:
             return false;
@@ -123,6 +125,46 @@ const formatArtis = (datas) => {
       mainData = Object.assign(mainData,Data);
     });
     return mainData;
+}
+
+
+const formatVideo = (datas) => {
+    const data = Object.keys(datas).sort();
+    let mainData ={};
+    let Data = null;
+    data.forEach((key) => {
+      if(key == "Date"){
+        const date = changeFormatData(`${datas[key]}`);
+        Data = { "date" : `${date}`};
+      }
+      if(key == "Artist"){
+        Data = { "artis" : `${datas[key]}`};
+      }
+      if(key == "Song Name"){
+        Data = { "song" : `${datas[key]}`};
+      }
+      if(key == "Korean Name"){
+        const korea = (datas[key] === null) ? null : `${datas[key]}`;
+        Data = { "k_name" : `${korea}`};
+      }
+      if(key == "Director"){
+        const dr = (datas[key] === null) ? null : `${datas[key]}`;
+        Data = { "director" : `${dr}`};
+      }
+      if(key == "Video"){
+        Data = { "link" : `${datas[key]}`};
+      }
+      if(key == "Type"){
+        const typeValue = (datas[key] == "Boy" || datas[key] == "Girl") ? "Grup" : "Solo";
+        Data = { "type" : `${typeValue}`};
+      }
+      if(key == "Release"){
+        Data = { "relase" : `${datas[key]}`};
+      }
+      mainData = Object.assign(mainData,Data);
+    });
+
+  return mainData;
 }
 
 module.exports = {

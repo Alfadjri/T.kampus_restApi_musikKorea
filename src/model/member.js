@@ -17,9 +17,15 @@ const getMember = (id_artis,id_grup) => {
   if(isGrup == true){
     query = `Select * from Member_grup where id_artis = '${id_artis}' and id_grup = '${id_grup}'`;
   }else{
-    query = `SELECT count(id_member) as member FROM Member_grup where id_artis = '${id_artis}'` ;
+    query = `SELECT id_member as member FROM Member_grup where id_artis = '${id_artis}'` ;
   }
   return db.execute(query);
+}
+
+const deleteMember = (id_member) => {
+  const query = `Delete from Member_grup where id_member = '${id_member}'`;
+  return db.execute(query);
+
 }
 
 const update = (id_artis,id_grup,id_member) => {
@@ -35,4 +41,5 @@ module.exports = {
   create,
   getMember,
   update,
+  deleteMember
 }

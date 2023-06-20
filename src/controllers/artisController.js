@@ -21,7 +21,10 @@ const createArtis = async (req,res) => {
             return false; 
           }
         }
-        await Member.create(id_artis,searchGrup);
+        const [checkMember] = await Member.getMember(id_artis,searchGrup);
+        if(checkMember[0] === undefined){
+          await Member.create(id_artis,searchGrup);
+        }
     };
   }
   if(req.body !== undefined){
@@ -43,12 +46,10 @@ const getUpdate = async(req,res) => {
         const search = req.params.nama;
         const body = req.body;
         const [before] = await Artis.getValue(search);
-        console.log(before);
         const id_artis = before[0]['id_artis'];
         const id_negara = await checkNegara(body.negara,body.kota);
         body.negara = id_negara;
         const grup =req.body.grup;
-        // kalau grup ada  
         if(grup[0] !== undefined){
           for(const valueGrup of grup) {
             const id_grup = await getGrup(valueGrup);
@@ -56,7 +57,7 @@ const getUpdate = async(req,res) => {
               return res.status(400).json({Message : "Grup yang di sebutkan tidak terdaftar"});
             }
             const [isMember] = await Member.getMember(id_artis);
-            if(isMember[0]['member'] <= 0 ){
+            if(isMember.length <= 0 ){
               await Member.create(id_artis,id_grup);
             }else{
               const [getMember] = await Member.getMember(id_artis,id_grup);
@@ -88,6 +89,27 @@ const getValue = async (req,res) => {
     return res.status(200).json({ Message : "Data berhasil di ambil" , data : result });
   }catch(e){
     return res.status(400).json({ Message : "Data tidak di temukan" });
+  }
+}
+
+const getDelete = async(req,res) => {
+  try{
+    const search = req.params.nama;
+    const [getId] = await Artis.getValue(search);
+    if(getId[0] === undefined) {
+      return res.status(404).json({ message : "Data tidak di temukan"});
+    }
+    const id_artis = getId[0]['id_artis'];
+    const [checkMember] = await Member.getMember(id_artis);
+    if(checkMember.length > 0 ) {
+        for(const valueMember of checkMember){
+          await Member.deleteMember(valueMember.member);
+        }
+    }
+    await Artis.deleteMember(id_artis);
+    return res.status(200).json({Message : "Data berhasil di hapus"});
+  }catch(e){
+    return res.stauts(400).json({Message : "Parameter tidak ditekuman"});
   }
 }
 
@@ -137,4 +159,5 @@ module.exports = {
   createArtis,
   getValue,
   getUpdate,
+  getDelete,
 }
