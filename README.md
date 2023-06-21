@@ -1,23 +1,43 @@
-# Rest Api Musik Korea
-Repo ini bertujuan hanya untuk tugas kuliah  membuat rest api dengan theme musik korea
-Repo ini menggunkana model MVC ( Model View Controller)
 
-# Pakage yang di gunakan
-Repo ini menggunakan pakage:
-1. Docker
-2. .dotEnv
-3. nodemon
-4. phpmyadmin
+# Tujuan Pembuatan 
+Repo ini di buat sebagai tugas kuliah untuk percoban dan test kemampuan membuat restApi
 
-Repo ini menggunakan database:
-1. Mysql
+# Pakage menggunkan 
+1.expressjs
+2.dotEnv
+3.docker
+4.phpmyadmin
+5.mysql
 
-# Start project
-Menggunakan node 
-``` shell
-    npm start
+# Model 
+Repo ini menggunkana model MVC (Model View Controller)
+
+# Setup Project
+*Rename .env.example to .env
+*Run Project menggunkana npm 
+1.Menggunkana npm 
+``` bash 
+npm install```
+2.Run
+``` bash 
+npm start```
+3.url 
+``http://localhost:4000/``
+
+*Run Project Docker
+```bash
+docker-compose -f docker-compose.yml up
 ```
-Menggunakan docker
-``` shell
-    docker-compose -f docker-compose.yml up 
-```
+url 
+``http://localhost/``
+
+
+## note
+untuk phpmyadmin mode developer 
+``hhttp://localhost:8080``
+
+
+## Sumber Database list 
+* https://www.kaggle.com/datasets/kimjihoo/kpopdb?resource=download
+
+
