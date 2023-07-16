@@ -1,0 +1,473 @@
+{
+	"info": {
+		"_postman_id": "c94e3a3b-0019-4d8a-ad73-346510b2fc9d",
+		"name": "restApiMusik_expressjs",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "12276694"
+	},
+	"item": [
+		{
+			"name": "import",
+			"item": [
+				{
+					"name": "grup",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "file",
+									"type": "file",
+									"src": "/home/kentanaka/Documents/TugasKuliah/backend/expressjs/restApiMusikKorea/Soruce Data/Excel Format DAta (1)/kpop_idols_girl_groups.csv"
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost/import/excel/grup",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"import",
+								"excel",
+								"grup"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "artis",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "file",
+									"type": "file",
+									"src": "/home/kentanaka/Documents/TugasKuliah/backend/expressjs/restApiMusikKorea/Soruce Data/Excel Format DAta (1)/kpop_idols.csv"
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost/import/excel/artis",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"import",
+								"excel",
+								"artis"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "video",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "file",
+									"type": "file",
+									"src": "/home/kentanaka/Documents/TugasKuliah/backend/expressjs/restApiMusikKorea/Soruce Data/Excel Format DAta (1)/kpop_music_videos.csv"
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost/import/excel/video",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"import",
+								"excel",
+								"video"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Grup",
+			"item": [
+				{
+					"name": "create",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"nama\" : \"Alfadjri\",\n    \"short\" : \"Fadjri\",\n    \"fanclub name\" : \"tidak ada \",\n    \"korea name\" : \"제\",\n    \"debut\" : \"2023/06/12\",\n    \"nama company\" : \"Star \",\n    \"jumlah member\" : 1,\n    \"original member\" : 1,\n    \"active\" : \"Yes\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost/grup/create",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"grup",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getAllGrup",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "localhost/grup/",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"grup",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Search",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost/grup/Super Junior",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"grup",
+								"Super Junior"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"nama\" : \"ALfadjri\",\n    \"short\" : \"\",\n    \"fanclub name\" : \"\",\n    \"korea name\" : \"제국의\",\n    \"debut\" : \"2023/06/13\",\n    \"nama company\" : \"Star Trek\",\n    \"jumlah member\" : 2,\n    \"original member\" : 9,\n    \"active\" : \"No\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost/grup/ALfadjri",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"grup",
+								"ALfadjri"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "localhost/grup/Alfadjri",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"grup",
+								"Alfadjri"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Artis",
+			"item": [
+				{
+					"name": "Create",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"grup\": [ \"Ladies' Code\" ],\n  \"negara\": \"Indonesia\",\n  \"birth\": \"1994-12-08\",\n  \"f_name\": \"Kim Joomi\",\n  \"gender\": \"F\",\n  \"k_s_name\": \"주니\",\n  \"k_name\": \"김주미\",\n  \"s_name\": \"Zuny\",\n  \"kota\"  : \"Bandung\"\n}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost/artis/create",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"artis",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getAll",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "localhost/artis/",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"artis",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "search",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "localhost/artis/Alfadjri Dwi Fadhilah",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"artis",
+								"Alfadjri Dwi Fadhilah"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"s_name\" : \"Kentanaka\",\n    \"f_name\" : \"ALfadjri Dwi Fadhilah\",\n    \"k_name\" : \"김\",\n    \"k_s_name\" : \"주\",\n    \"birth\" : \"2000-09-20\",\n    \"gender\" : \"M\",\n    \"negara\" : \"Indonesia\",\n    \"kota\" : \"Jakarta\",\n    \"grup\" : [\"Ladies' Code\"]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost/artis/Kim Joomi",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"artis",
+								"Kim Joomi"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "localhost/artis/Alfadjri Dwi Fadhilah",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"artis",
+								"Alfadjri Dwi Fadhilah"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Musik",
+			"item": [
+				{
+					"name": "Create",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"artis\": \"BTS\",\n  \"date\": \"2020-02-28\",\n  \"k_name\": \"온\",\n  \"relase\": \"Minor\",\n  \"song\": \"ON\",\n  \"type\": \"Grup\",\n  \"link\": \"https://youtu.be/mPVDGOVjRQ0\"\n}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost/video/create",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"video",
+								"create"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "TestingRequest",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost/",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						""
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
